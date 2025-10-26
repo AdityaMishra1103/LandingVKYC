@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Recording - Video KYC</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="#4F46E5"/>
+                    <path d="M20 10L28 16V24L20 30L12 24V16L20 10Z" stroke="white" stroke-width="2" fill="none"/>
+                </svg>
+                <h1>Video KYC</h1>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-step completed">✓ Upload</div>
+                <div class="progress-step active">2. Video</div>
+                <div class="progress-step">3. Verify</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="video-section">
+                <h2>Video Verification</h2>
+                <p class="subtitle">Record a short video for face liveness detection</p>
+
+                <div class="video-container">
+                    <video id="videoElement" autoplay playsinline></video>
+                    <canvas id="canvasElement"></canvas>
+                    <div id="faceOverlay" class="face-overlay"></div>
+                    
+                    <div class="recording-indicator" id="recordingIndicator" style="display: none;">
+                        <span class="rec-dot"></span> Recording
+                    </div>
+                    
+                    <div class="timer" id="timer" style="display: none;">00:00</div>
+                </div>
+
+                <div class="instructions" id="instructions">
+                    <h3>📝 Instructions:</h3>
+                    <div id="instructionText">
+                        <p>1. Position your face in the frame</p>
+                        <p>2. Look straight at the camera</p>
+                        <p>3. Ensure good lighting</p>
+                        <p>4. Click "Start Recording" when ready</p>
+                    </div>
+                </div>
+
+                <div class="liveness-checks" id="livenessChecks" style="display: none;">
+                    <h3>Liveness Checks:</h3>
+                    <div class="check-item" id="checkFaceDetected">
+                        <span class="check-status">⏳</span> Face Detected
+                    </div>
+                    <div class="check-item" id="checkBlink">
+                        <span class="check-status">⏳</span> Blink Detection
+                    </div>
+                    <div class="check-item" id="checkTurnLeft">
+                        <span class="check-status">⏳</span> Turn Head Left
+                    </div>
+                    <div class="check-item" id="checkTurnRight">
+                        <span class="check-status">⏳</span> Turn Head Right
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn-secondary" id="startCameraBtn" onclick="startCamera()">
+                        📹 Start Camera
+                    </button>
+                    <button class="btn-danger" id="startRecordingBtn" onclick="startRecording()" disabled>
+                        ⏺️ Start Recording
+                    </button>
+                    <button class="btn-warning" id="stopRecordingBtn" onclick="stopRecording()" style="display: none;">
+                        ⏹️ Stop Recording
+                    </button>
+                </div>
+
+                <div class="button-group" style="margin-top: 20px;">
+                    <button class="btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="btn-primary" id="submitBtn" onclick="submitForVerification()" disabled>
+                        Submit for Verification →
+                    </button>
+                </div>
+
+                <div id="statusMessage" class="status-message" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/video-recording.js"></script>
+    <script src="js/face-detection.js"></script>
+</body>
+</html>
